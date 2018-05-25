@@ -43,6 +43,7 @@ def symbol_import(f = 'DA_data_0420_1/sig.txt'):
 
 
 def main():
+    # BUG: THIS SCRIPT DOSE NOT WORKING
     symbolRate = 46.08 # symbol rate is 46.08 M Baud per second
     N = 16  # Sample insertion
     symbol_num = 768
@@ -76,7 +77,7 @@ def main():
     VH_Write(sI_hlf,sQ_hlf)     # convert to verilog type
 
     # demod
-    needDemod =1
+    needDemod =0
     if needDemod:
         sI_hlf = modulation.duplicate(sI_hlf,time=3)
         sQ_hlf = modulation.duplicate(sQ_hlf,time=3)
@@ -111,34 +112,34 @@ def main():
     isPlotNeed = 1
     if isPlotNeed:
         plt.figure(1)
-        w = np.hanning(len(rc))
-        f,p = FFTdBFs.FFTdBFs(rc, win=w, fs = f_sample_rate, ref=1)
+        w = np.hanning(len(sB))
+        f,p = FFTdBFs.FFTdBFs(sB, win=w, fs = f_sample_rate, ref=1)
         plt.title('The RRC')
         plt.plot(f,p)
 
-        w = np.hanning(len(sI_hlf))
-        f,p = FFTdBFs.FFTdBFs(sI_hlf, win=w, fs = f_sample_rate, ref=2**14)
-        plt.figure(2)
-        plt.title('square-wave after shaping filter(Freq Domain)')
-        plt.plot(f,p)
+        # w = np.hanning(len(sI_hlf))
+        # f,p = FFTdBFs.FFTdBFs(sI_hlf, win=w, fs = f_sample_rate, ref=2**14)
+        # plt.figure(2)
+        # plt.title('square-wave after shaping filter(Freq Domain)')
+        # plt.plot(f,p)
 
-        plt.figure(5)
-        plt.title('I')
-        plt.plot(sI)
-        plt.figure(6)
-        plt.title('I')
-        plt.plot(sI_hlf)
-        if needDemod:
-            plt.figure(3)
-            plt.title('Constellation symbols')
-            plt.plot(sI,sQ,c='green',alpha=0.3)
-            plt.scatter(It,Qt,c='red', alpha=1,s=10)
+        # plt.figure(5)
+        # plt.title('I')
+        # plt.plot(sI)
+        # plt.figure(6)
+        # plt.title('I')
+        # plt.plot(sI_hlf)
+        # if needDemod:
+        #     plt.figure(3)
+        #     plt.title('Constellation symbols')
+        #     plt.plot(sI,sQ,c='green',alpha=0.3)
+        #     plt.scatter(It,Qt,c='red', alpha=1,s=10)
 
-            w = np.hanning(len(sI))
-            f,p = FFTdBFs.FFTdBFs(sI, win=w, fs = f_sample_rate, ref=2**14)
-            plt.figure(4)
-            plt.title('After modulation')
-            plt.plot(f,p)
+        #     w = np.hanning(len(sI))
+        #     f,p = FFTdBFs.FFTdBFs(sI, win=w, fs = f_sample_rate, ref=2**14)
+        #     plt.figure(4)
+        #     plt.title('After modulation')
+        #     plt.plot(f,p)
 
 
 

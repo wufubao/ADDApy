@@ -17,13 +17,13 @@ FFT
 
 Requirements/Dependencies
 -------------------------
-- python 2.7 or above
+- python 3.4 or above
 - numpy 1.14.0 or above
 - matplotlib==2.1.2 or above
 
 Usage
 ------------------------
-
+Run <code>demod.py</code>
 
 Acknowledge
 ------------------------
